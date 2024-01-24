@@ -1,0 +1,61 @@
+#!/bin/bash
+
+# ...
+
+# Menampilkan menu pilihan
+while true; do
+    echo "=== Otomatisasi Git ==="
+    echo "1. Periksa Status Repository"
+    echo "2. Tambahkan Perubahan"
+    echo "3. Lakukan Commit"
+    echo "4. Pindah ke Cabang Lain"
+    echo "5. Ambil Perubahan dari Remote"
+    echo "6. Gabungkan Cabang"
+    echo "7. Buat Repository Git Baru"
+    echo "8. Buat File"
+    echo "9. Keluar"
+
+    # Menerima input dari pengguna
+    read -p "Pilih nomor operasi Git (1-9): " choice
+
+    # Pemilihan berdasarkan pilihan pengguna
+    case $choice in
+        1)
+            git status
+            ;;
+        2)
+            git add .
+            echo "Perubahan berhasil ditambahkan ke area stage."
+            ;;
+        3)
+            read -p "Masukkan pesan commit: " commit_message
+            git commit -m "$commit_message"
+            echo "Commit berhasil dilakukan."
+            ;;
+        4)
+            read -p "Masukkan nama cabang: " branch_name
+            git checkout "$branch_name"
+            echo "Pindah ke cabang $branch_name."
+            ;;
+        5)
+            git pull
+            echo "Perubahan dari remote diambil."
+            ;;
+        6)
+            read -p "Masukkan nama cabang yang akan digabungkan: " merge_branch
+            git merge "$merge_branch"
+            echo "Cabang berhasil digabungkan."
+            ;;
+        7)
+            create_git_repo
+            ;;
+        8)
+            create_file
+            ;;
+        9)
+            echo "Keluar dari skrip otomatisasi Git." ; exit 0 ;;
+        *)
+            echo "Pilihan tidak valid. Silakan coba lagi." ;;
+    esac
+done
+
